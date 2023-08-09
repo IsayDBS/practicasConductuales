@@ -9,7 +9,7 @@ var jsVisualArrayResponse = (function (jspsych){
                 default: undefined
             },
             posicion:{
-                type: jspsych.ParameterType.OBJECT, //posicion que se cambai de color
+                type: jspsych.ParameterType.OBJECT, //posicion que se cambia de color [renglon, columna]
                 default: undefined,
             },
             cambioColor:{
@@ -22,7 +22,7 @@ var jsVisualArrayResponse = (function (jspsych){
             },
             color:{
                 type:jspsych.ParameterType.STRING, //color a cambiar de la posicion del circulo
-                default: "img/grey.png",
+                default: undefined,
             }
         }
     }
@@ -33,16 +33,10 @@ var jsVisualArrayResponse = (function (jspsych){
             this.jsPsych = jsPsych;
         }
 
-        circuloPosicionCambioColor(arreglo, posicion, color){
-            arreglo[posicion[0]][posicion[1]] = `
-            <div class="parent">
-                <img src="img/circle.png" class="image1" />
-                <img src="img/${color}.png" class="image2" />
-            </div>
-            `
-        }
-
-        circuloPosicionSinCambioColor(arreglo, posicion, color){
+        /*
+        * Funcion que agrega el circulo
+        */
+        circuloPosicion(arreglo, posicion, color){
             arreglo[posicion[0]][posicion[1]] = `
             <div class="parent">
                 <img src="img/circle.png" class="image1" />
@@ -53,11 +47,11 @@ var jsVisualArrayResponse = (function (jspsych){
 
         trial(display_element, trial){
             const array = trial.arreglo
-
-            if(trial.cambioColor == true){
-                this.circuloPosicionCambioColor(array, trial.posicion, trial.color)
+            //Preguntamos si hay cambio de color en la celda
+            if(trial.cambioColor){
+                this.circuloPosicion(array, trial.posicion, trial.color)
             }else{
-                this.circuloPosicionSinCambioColor(array, trial.posicion, trial.colorPosicion)
+                this.circuloPosicion(array, trial.posicion, trial.colorPosicion)
             }
 
             var html_content = `
@@ -129,16 +123,28 @@ var jsVisualArrayResponse = (function (jspsych){
                 // informacion que se va a guardar
                 let data = {
                   rt: info.rt,
+                  cambioDeColor: trial.cambioColor,
+                  correcto: function(){ //nos dice si acerto o no
+                    if(trial.cambioColor){
+                        return this.jsPsych.pluginAPI.compareKeys(info.key,'s')
+                    }else{
+                        return this.jsPsych.pluginAPI.compareKeys(info.key,'k')
+                    }
+                  },
+                  colorCeldaAntesDePrueba: trial.colorPosicion, //el color de la celda
+                  colorCeldaDespuesDePrueba: trial.color,
+                  posicionCelda: trial.posicion,
+                  arreglo: trial.arreglo,
                 }
             
-                // end the trial
+                // final
                 this.jsPsych.finishTrial(data);
               }
             
 
             this.jsPsych.pluginAPI.getKeyboardResponse({
                 callback_function: after_key_response,
-                valid_responses: ['s','k'],
+                valid_responses: ['s','k'],//respuestas validas
                 persist: false,});
         }
     }

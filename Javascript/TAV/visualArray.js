@@ -8,10 +8,6 @@ var jsVisualArray = (function (jspsych){
                 type: jspsych.ParameterType.BOOL,// nos dice si el array se hara al azar
                 default: true,
             },
-            cuadros:{
-                type: jspsych.ParameterType.INT,//cuantos cuadros a color tendrá el array
-                default: -1,
-            },
             arreglo:{
                 type: jspsych.ParameterType.OBJECT, //0 no hay cambio de color, 1 rojo, 2 verde, 3 azul, 4 morado, 5 amarillo, 6 negro
                 default: [
@@ -20,6 +16,10 @@ var jsVisualArray = (function (jspsych){
                     [0,0,0,0],
                     [0,0,0,0]
                 ]
+            },
+            posicionDelCirculo:{
+                type: jspsych.ParameterType.OBJECT,//lista con [renglon,columna] del que sera circulado
+                default: []
             }
         }
     }
@@ -30,6 +30,11 @@ var jsVisualArray = (function (jspsych){
             this.jsPsych = jsPsych;
         }
 
+        /*
+        * Funcion usada para cambiar el arreglo, de numeros a etiquetas de html
+        * nos regresa el color de la celda que va a cambiar el color
+        * que seria la primer posicion del arreglo
+        */
         coloresArreglo(arreglo, posicion){
             var aux = 'color'
             var auxDiccionario = {
@@ -52,113 +57,70 @@ var jsVisualArray = (function (jspsych){
                         <img src="img/${auxDiccionario[arreglo[i][j]]}.png" class="image2" />
                     </div>
                     `
-                    /*
-                    if(arreglo[i][j] == 0){//gris
-                        arreglo[i][j] = `
-                        <div class="parent">
-                            <img src="img/grey.png" class="image2" />
-                        </div>
-                        `
-                    }else if(arreglo[i][j] == 1){//rojo
-                        if(i == posicion[0] && j == posicion[1]){
-                            aux = 'red'
-                        }
-                        arreglo[i][j] = `
-                        <div class="parent">
-                            <img src="img/red.png" class="image2" />
-                        </div>
-                        `
-                    }else if(arreglo[i][j] == 2){//verde
-                        if(i == posicion[0] && j == posicion[1]){
-                            aux = 'green'
-                        }
-                        arreglo[i][j] = `
-                        <div class="parent">
-                            <img src="img/green.png" class="image2" />
-                        </div>
-                        `
-                    }else if(arreglo[i][j] == 3){//azul
-                        if(i == posicion[0] && j == posicion[1]){
-                            aux = 'blue'
-                        }
-                        arreglo[i][j] = `
-                        <div class="parent">
-                            <img src="img/blue.png" class="image2" />
-                        </div>
-                        `
-                    }else if(arreglo[i][j] == 4){//morado
-                        if(i == posicion[0] && j == posicion[1]){
-                            aux = 'purple'
-                        }
-                        arreglo[i][j] = `
-                        <div class="parent">
-                            <img src="img/purple.png" class="image2" />
-                        </div>
-                        `
-                    }else if(arreglo[i][j] == 5){//amarillo
-                        if(i == posicion[0] && j == posicion[1]){
-                            aux = 'yellow'
-                        }
-                        arreglo[i][j] = `
-                        <div class="parent">
-                            <img src="img/yellow.png" class="image2" />
-                        </div>
-                        `
-                    }else if(arreglo[i][j] == 6){//negro
-                        if(i == posicion[0] && j == posicion[1]){
-                            aux = 'black'
-                        }
-                        arreglo[i][j] = `
-                        <div class="parent">
-                            <img src="img/black.png" class="image2" />
-                        </div>
-                        `
-                    }
-                    */
                 }
             }
             return aux;
         }
 
         trial(display_element, trial){
-            if(trial.cuadros == -1){
-                trial.cuadros = Math.floor(Math.random()*12) + 4
-            }
-            //console.log(aux)
+            //Lista donde guardaremos las posiciones de los recuadros pintados
+            //de la forma [renglo, columna]
             var posColores = []
 
+            var colorCirculo = 'color'
 
             if(trial.random){
+                //Revisamos si nos dieron cuantos cuadros tendra, en caso de que no, le damos un valor
+                //al azar entre 4 y 12
+                var cuadros = Math.floor(Math.random()*12) + 4
+                //Agregamos esto al arreglo, en caso de que pasen algo al arreglo
                 trial.arreglo = [
                     [0,0,0,0],
                     [0,0,0,0],
                     [0,0,0,0],
                     [0,0,0,0]
                 ]
-                while(trial.cuadros > 0){
-                    console.log("Es random")
+                /*
+                *Llena aleatoriamente el arreglo con numeros del 1 al 6
+                * que representan colores de la siguiente manera
+                * 0: 'grey',
+                * 1: 'red',
+                * 2: 'green',
+                3: 'blue',
+                4: 'purple',
+                5: 'yellow',
+                6: 'black',
+                * Llenamos posColores con las posiciones de los colores
+                * */
+                while(cuadros > 0){
                     var row = Math.floor(Math.random()*4)
                     var col = Math.floor(Math.random()*4)
                     if(trial.arreglo[row][col] == 0){
                         posColores.push([row,col])
                         trial.arreglo[row][col] = Math.floor(Math.random() * 6) + 1
-                        trial.cuadros--;
+                        cuadros--;
                     }
                 }
+                /*
+                * Hace un shuffle al arreglo
+                * Dejandonos el que está en la posicion posColores[0] como el que podria cambiar de color
+                */
+                posColores = jsPsych.randomization.shuffle(posColores) 
+
+                //Colorea nuestro arreglo, de numeros a html
+                colorCirculo = this.coloresArreglo(trial.arreglo, posColores[0])
             }else{
-                console.log("No es random")
-                for(var i = 0; i < trial.arreglo.length; i++){
-                    for(var j = 0; j < trial.arreglo[i].length; j++){
-                        if(trial.arreglo[i][j] != 0){
-                            posColores.push([i,j])
-                        }
-                    }
-                }
+
+                colorCirculo = this.coloresArreglo(trial.arreglo, trial.posicionDelCirculo)
+                
+                //Utilizamos la lista para simplificar codigo, solo utilizamos el primer elemento
+                posColores.push(trial.posicionDelCirculo)
             }
-            posColores = jsPsych.randomization.shuffle(posColores) //hace un shuffle al arreglo
-            //posColores[0] es el cuadro que se va a cambiar de color
-            var colorCirculo = this.coloresArreglo(trial.arreglo, posColores[0])//da la coordenada del que será circulado
+
             
+            /*
+            *Arreglo convertido en html
+            */
             var html_content = `
             <table>
               <tr>
@@ -226,18 +188,14 @@ var jsVisualArray = (function (jspsych){
                 display_element.innerHTML = "";
                 var trial_data = {
                     rt: info.rt,
-                    arreglo: trial.arreglo,
-                    color: colorCirculo,
-                    posiciones: posColores,
+                    arreglo: trial.arreglo, //arreglo convertido en html
+                    color: colorCirculo,    //Color de la posicion que sera circulada, es decir, posColores[0]
+                    posicionCirculo: posColores[0], //primera posicion que es la que se va a circular
                 };
     
                 this.jsPsych.finishTrial(trial_data);
             }, 900);//es 900
         }
-
-        
-
-
     }
 
     VisualArray.info = info;
