@@ -28,6 +28,7 @@ win.flip()
 
 directory = os.getcwd()
 
+#Imagenes usadas
 imagenL0 = visual.ImageStim(win, image=directory + '/multimedia/n1.png', size=[0.2,0.2])
 imagenL1 = visual.ImageStim(win, image=directory + '/multimedia/n2.png', size=[0.2,0.2])
 imagenL2 = visual.ImageStim(win, image=directory + '/multimedia/n3.png', size=[0.2,0.2])
@@ -39,6 +40,7 @@ imagenCaja3 = visual.ImageStim(win, image=directory + '/multimedia/box.png', siz
 imagenCorrecto = visual.ImageStim(win, image=directory + '/multimedia/correct.png', size=[0.2,0.2])
 imagenIncorrecto = visual.ImageStim(win, image=directory + '/multimedia/error.png', size=[0.2,0.2])
 
+#Posiciones usadas para presentar las imagenes
 posiciones = [[-0.75,0],[0.75,0],[0,-0.75],[0,0.75]]
 
 letras = [imagenL0, imagenL1, imagenL2, imagenL3]

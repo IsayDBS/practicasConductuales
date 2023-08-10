@@ -3,6 +3,11 @@ from psychopy.hardware import keyboard
 import random
 import csv
 
+"""
+Mostramos palabras que es un color, pero son coloreadas de otro color, lo que queremos es que el usuario presione
+la tecla referente al color y no a la plaabra
+"""
+
 kb = keyboard.Keyboard()
 
 #red, green, yellow, blue
@@ -37,11 +42,7 @@ for i in colorList:
     messagePrueba.draw()
     win.flip()
     c = kb.waitKeys()
-    #c[0].insert(0,colorPalabra)
-    #print(c)
     respuestas.append([colorPalabra, c[0].name, c[0].rt])
-
-#print(respuestas)
 
 with open('respuestas.csv','w',encoding='UTF8',newline='') as f:
     writer = csv.writer(f)

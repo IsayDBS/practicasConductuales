@@ -37,7 +37,7 @@ var instrucciones = {
 };
 timeline.push(instrucciones)
 
-/* test trials */ 
+/* LIsta de las pruebas */ 
 var test_stimuli = [//estimulos posibles,se ponen entre {} para diferenciarlos
     { stimulus: "img/green_o_f_f_b_079.jpg",  
       correct_response: 'f',
@@ -89,6 +89,7 @@ var test_stimuli = [//estimulos posibles,se ponen entre {} para diferenciarlos
     }
 ];
 
+//Pone la cruz en la pantalla
 var fixation = { //mensaje entre ensayos
     type: jsPsychHtmlKeyboardResponse,
     stimulus: '<div style="font-size:60px;">+</div>',
@@ -99,6 +100,7 @@ var fixation = { //mensaje entre ensayos
     }
 }
   
+//Ponemos la imagen
 var test = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function(){
@@ -122,7 +124,7 @@ var test = {
     }
 }  
   
-  
+//Pruebas a hacer
 var test_procedure = {
     timeline: [fixation, test],
     timeline_variables: test_stimuli,
@@ -132,7 +134,7 @@ var test_procedure = {
 
 timeline.push(test_procedure);
 
-/* define debrief */
+/* Resultados finales */
 var debrief_block = {
   type: jsPsychHtmlKeyboardResponse,
   stimulus: function() {

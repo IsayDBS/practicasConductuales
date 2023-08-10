@@ -50,6 +50,7 @@ var dummies = [
     },
 ];
 
+//Muestra la imagen
 var pruebaImagen = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function() {
@@ -65,7 +66,8 @@ var pruebaImagen = {
     return html;
     },
 }
-    
+
+//Muestra la palabra 
 var pruebaPalabra = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: function(){
@@ -82,6 +84,7 @@ var pruebaPalabra = {
     return html;
     },
     trial_duration: 250,
+    choices: "NO_KEYS",
 }
 
 var test_procedure = {
