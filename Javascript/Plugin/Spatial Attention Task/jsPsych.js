@@ -1,10 +1,16 @@
 var jsPsych = initJsPsych({
     on_finish: function(){
-        jsPsych.data.displayData('csv');
+        jsPsych.data.get().localSave('csv','informacion.csv');
     },
 });
 
 var timeline = [];
+
+var preload = {
+    type: jsPsychPreload,
+    images: ['img/sanaoria.png'],
+    auto_preload: true,
+}
 
 var flecha = {
     type: jsFlecha,

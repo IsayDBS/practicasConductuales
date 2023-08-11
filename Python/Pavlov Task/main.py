@@ -26,15 +26,11 @@ win.flip()
 
 directory = os.getcwd()
 
-#print(directory)
-
-sonido = sound.Sound(directory + '/multimedia/bell-ring-01.mp3')
-#nextFlip = win.getFutureFlipTime(clock='ptb')
+sonido = sound.Sound(directory + '/multimedia/bell-ring-01.wav')
 imagen = visual.ImageStim(win, image=directory + '/multimedia/blue.png')
 
 num_trials = 5
 
-#timer = core.Clock()
 respuestas = []
 
 kb.clock.reset()
@@ -45,8 +41,6 @@ for trial in range(num_trials):
     sonido.play()              #Reproduce el sonido
     core.wait(sonido.getDuration())#Espera la duración del sonido
     sonido.stop()              #Es necesario detener el sonido
-
-    #core.wait(0.5) #Esperamos un momento indeterminado entre el sonido y la imagen
 
     imagen.draw()
     win.flip()
@@ -99,8 +93,6 @@ for trial in range(num_trials):
     
 
     win.flip()      #limpia pantalla
-
-    #print(respuestas)
 
     kb.clock.reset()    #Reinicia reloj
 
