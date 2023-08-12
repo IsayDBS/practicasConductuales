@@ -28,13 +28,13 @@ var jsImagen = (function (jspsych){
             if(trial.posicion === "left" || trial.posicion === "right"){
                 html_content = `<div style='width: 1100px;'>
                     <div style='float: ${trial.posicion};'>
-                        <img src="${trial.imagen}"></img>
+                        <img src="${trial.imagen}" width="200" height="200"></img>
                     </div>
                 </div>`
             }else{
                 html_content = `
                     <div style='${trial.posicion}: -150px; position: relative'>
-                        <img src="${trial.imagen}"></img>
+                        <img src="${trial.imagen}" width="200" height="200"></img>
                     </div>
                 `
             }

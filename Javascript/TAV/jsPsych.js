@@ -1,4 +1,13 @@
-var jsPsych = initJsPsych();
+/*
+* La prueba visual de arreglo (TAV) es un experimento, en el cual el usuario
+* intenta percibir los cambios entre dos imagenes
+*
+*/
+var jsPsych = initJsPsych({
+  on_finish: function(){
+      jsPsych.data.get().localSave('csv','informacion.csv');
+  },
+});
 
 var timeline = [];
 

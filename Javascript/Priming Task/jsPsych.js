@@ -5,7 +5,11 @@
 *
 */
 
-var jsPsych = initJsPsych();
+var jsPsych = initJsPsych({
+    on_finish: function(){
+        jsPsych.data.get().localSave('csv','informacion.csv');
+    },
+});
 
 var timeline = [];
 

@@ -1,3 +1,5 @@
+
+
 var jsPsych = initJsPsych({
     on_finish: function(){
         jsPsych.data.get().localSave('csv','informacion.csv');
@@ -8,7 +10,7 @@ var timeline = [];
 
 var preload = {
     type: jsPsychPreload,
-    images: ['img/sanaoria.png'],
+    images: ['img/circulo.png'],
     auto_preload: true,
 }
 
@@ -25,23 +27,23 @@ var imagen = {
 var lista = [
     {
         posicion: 'top',
-        imagen: 'img/sanaoria.png',
+        imagen: 'img/circulo.png',
     },
     {
         posicion: 'bottom',
-        imagen: 'img/sanaoria.png',
+        imagen: 'img/circulo.png',
     },
     {
         posicion: 'top',
-        imagen: 'img/sanaoria.png',
+        imagen: 'img/circulo.png',
     },
     {
         posicion: 'left',
-        imagen: 'img/sanaoria.png',
+        imagen: 'img/circulo.png',
     },
     {
         posicion: 'right',
-        imagen: 'img/sanaoria.png',
+        imagen: 'img/circulo.png',
     },]
   
 var procedure = {
