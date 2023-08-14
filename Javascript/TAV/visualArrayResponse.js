@@ -1,3 +1,21 @@
+/*
+*Plugin jsVisualArrayResponse, el cual hace una colección de cuadrados de colores con una posición circulada
+*Parámetros:
+*           -arreglo: un arreglo de 4*4, cada elemento es un string en html.
+*           -cambioColor: valor booleano, true si hay cambio de color, false si no hay cambio
+*           -posicion: la posicion dentro del arreglo que sera circulada en forma de lista con dos elementos [renglon, columna]
+*           -colorPosicion: color actual de la celda a circular
+*           -color: color al que se va a cambiar la celda circulada
+*Salida:
+*           -rt: tiempo de respuesta
+*           -cambioDeColor: booleano si nos dice si cambia el color, true para si, false para no
+*           -correcto: booleano si nos dice si el participante presiono la tecla correcta, true para si, false para no
+*           -colorCeldaAntesDePrueba: color antes de circular el cuadrado
+*           -colorCeldaDespuesDePrueba: color despues de circular el cuadrado
+*           -posicionCelda: posicion del cuadrado circulado, en forma de lista de dos elementos [renglon, columna]
+*           -arreglo: arreglo despues de circular el cuadrado
+*
+*/
 var jsVisualArrayResponse = (function (jspsych){
     "use strict"
 
@@ -48,9 +66,9 @@ var jsVisualArrayResponse = (function (jspsych){
         trial(display_element, trial){
             const array = trial.arreglo
             //Preguntamos si hay cambio de color en la celda
-            if(trial.cambioColor){
+            if(trial.cambioColor){//si hay cambio de color
                 this.circuloPosicion(array, trial.posicion, trial.color)
-            }else{
+            }else{//no hay cambio de color
                 this.circuloPosicion(array, trial.posicion, trial.colorPosicion)
             }
 

@@ -1,5 +1,3 @@
-
-
 var jsPsych = initJsPsych({
     on_finish: function(){
         jsPsych.data.get().localSave('csv','informacion.csv');
@@ -50,8 +48,6 @@ var procedure = {
     timeline: [flecha, imagen],
     timeline_variables: lista,
 }
-
-console.log(jsPsych.data.get().last());
 
 timeline.push(procedure);
 

@@ -55,7 +55,6 @@ respuestas = []
 for i in range(5):
     dibujaCajas(cajas)
     win.flip()
-    #random.shuffle(letras)
     letrasEnCajas = random.choices(letras, k=4)
     random.shuffle(posiciones)
     #Numero de L's que van a aparecer
@@ -64,7 +63,6 @@ for i in range(5):
     for j in range(apariciones + 1):
         letrasEnCajas[j].pos = posiciones[j]
         if letrasEnCajas[j] == imagenL3:
-            print('Se agrega la imagen')
             seEncuentra = True
         letrasEnCajas[j].draw()
     win.flip()

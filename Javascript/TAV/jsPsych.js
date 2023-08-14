@@ -12,8 +12,7 @@ var jsPsych = initJsPsych({
 var timeline = [];
 
 
-var imagenes = ["img/blue.png", 
-"img/white.png", 
+var imagenes = ["img/blue.png",  
 "img/black.png", 
 "img/yellow.png", 
 "img/green.png", 
@@ -39,7 +38,6 @@ var auxDiccionario = {
   4: 'purple',
   5: 'yellow',
   6: 'black',
-  7: 'white',
 }
 
 timeline.push(preload)
@@ -113,7 +111,7 @@ var lista = [
     arreglo: [
     ],
     random: true,
-    color: 'white',
+    color: 'black',
     cambioColor: false,
   }
 ]

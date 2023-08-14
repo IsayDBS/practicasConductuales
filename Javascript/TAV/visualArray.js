@@ -1,3 +1,23 @@
+/*
+* Plugin jsVisualArray, el cual hace una colección de cuadrados de colores
+* Parámetros:
+*           -random: booleano que nos dice la colección será al azar, por default es true, significando que es al azar, false es que no lo es
+*           y espera un valor en los dos siguientes parámetros
+*           -arreglo: una lista de listas de 4*4, con numeros que representan los colores de la siguiente manera.
+*                0: 'grey',
+*                1: 'red',
+*                2: 'green',
+*                3: 'blue',
+*                4: 'purple',
+*                5: 'yellow',
+*                6: 'black',
+*           -posicionDelCirculo: una lista con dos elementos, donde el primer elemento es el renglón y el segundo es la columna
+*
+* Valores de salida:
+*                   arreglo: el arreglo con código html que se imprime en pantalla.
+*                   color: color de la posición actual que será circulado.
+*                   posicionCirculo: una lista de dos elementos, renglón y columna, donde nos dice que posición del arreglo será ciruclado.
+*/
 var jsVisualArray = (function (jspsych){
     "use strict"
 

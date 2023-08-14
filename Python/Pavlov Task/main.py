@@ -1,4 +1,4 @@
-from psychopy import visual, sound, core, event
+from psychopy import visual, sound, core
 from psychopy.hardware import keyboard
 import os, csv, random
 
@@ -44,7 +44,6 @@ for trial in range(num_trials):
 
     imagen.draw()
     win.flip()
-    #c = event.waitKeys(timeStamped=timer)
     c = kb.waitKeys()
     respuestas.append([c[0].name, c[0].rt])
 
@@ -62,20 +61,13 @@ for trial in range(num_trials):
     core.wait(sonido.getDuration())#Espera la duración del sonido
     sonido.stop()              #Es necesario detener el sonido
 
-    #core.wait(random.choice([1, 0.5, 5, 2, 3.5])) #Esperamos un momento indeterminado entre el sonido y la imagen
-    #core.wait()
-
     turno = None #Utilizaremos turno para ver si ponemos una imagen o no, Si es True, imprime la imagen
     #En caso de no, espera 5 segundos y no imprime nada
-    #print(turno)
-
-    print(random.randint(1,5))
 
     if random.randint(1,5) == 1:#En este caso no imprime nada, solo reproduce sonido
         turno = False
     else:#Reproduce sonido
         turno = True
-    print(turno)
 
     if turno == True:#Se imprime la imagen
         imagen.draw()

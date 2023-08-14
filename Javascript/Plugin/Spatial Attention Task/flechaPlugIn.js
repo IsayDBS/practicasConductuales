@@ -24,7 +24,7 @@ var jsFlecha = (function (jspsych){
             var flecha = trial.direccion;
 
             if(flecha == -1){
-                flecha = jsPsych.randomization.randomInt(0,3);
+                flecha = Math.floor(Math.random()*4)//Elige un numero entre 0 y 3
             }
 
             var html_content = `
