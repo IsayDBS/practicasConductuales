@@ -1,3 +1,8 @@
+/*
+*Plugin que muestra una flecha apuntando en una dirección
+*(arriba, abajo, derecha, izquierda) siendo estos representados
+* en una lista por los espacios 0,1,2,3 respectivamente
+*/
 var jsFlecha = (function (jspsych){
     "use strict"
 
@@ -5,8 +10,8 @@ var jsFlecha = (function (jspsych){
         name: 'Flecha',
         parameters:{
             direccion: { //posicion de la imagen
-                type: jspsych.ParameterType.INT,
-                default: -1,
+                type: ,
+                default: ,
             }
         }
     }
@@ -21,33 +26,7 @@ var jsFlecha = (function (jspsych){
 
             let arrows =  ['↑','↓' ,'→',' ←'];
 
-            var flecha = trial.direccion;
-
-            if(flecha == -1){
-                flecha = Math.floor(Math.random()*4)//Elige un numero entre 0 y 3
-            }
-
-            var html_content = `
-            <div style="font-size: 50px;">
-                <p>${arrows[flecha]}</p>   
-            </div>
-            `
-
-            console.log(html_content);
-
-            display_element.innerHTML = html_content;
-
-            this.jsPsych.pluginAPI.setTimeout(() =>{
-                this.jsPsych.pluginAPI.clearAllTimeouts();
-                display_element.innerHTML = "";
-                var trial_data = {
-                    rt: info.rt,
-                    arrow: arrows[flecha],
-                };
-    
-                this.jsPsych.finishTrial(trial_data);
-            }, 2000);
-
+            
         }
 
     }

@@ -1,6 +1,6 @@
-# Exprimentos del comportamiento
+# Prácticas del experimentos del comportamiento
 
-Repositorio que contiene las prácticas propuestas en el manual en apoyo a la docencia de la Facultad de Psicología.
+Repositorio que contiene material de apoyo para manual en apoyo a la docencia de la Facultad de Psicología.
 
 Los frameworks utilizados para estos experimentos fueron:
 - JsPsych
